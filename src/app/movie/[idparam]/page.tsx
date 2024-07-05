@@ -4,10 +4,56 @@ import { movieRepository } from '@/modules/core/services/movie-repository'
 import { Wrapper } from '@/modules/core/ui/wrapper'
 import { Hero } from '@/modules/movie-details/components/hero'
 import { Stats } from '@/modules/movie-details/components/stats'
+import { Metadata } from 'next'
 
 interface Props {
   params: { idparam: string }
 }
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const idAndName = getIdAndNameFromParam(params.idparam)
+  if (idAndName == null) return {}
+
+  const { id } = idAndName
+  const [movie, keywords] = await Promise.all([
+    movieRepository.getById(id),
+    movieRepository.getKeywords(id),
+  ])
+
+  return {
+    description: movie.overview,
+    keywords: keywords.keywords.map((keyword) => keyword.name),
+    openGraph: {
+      description: movie.overview,
+      images: [
+        {
+          alt: movie.title,
+          height: 1080,
+          url: resolveMoviePath(movie.backdrop_path),
+          width: 1920,
+        },
+        {
+          alt: movie.title,
+          height: 630,
+          url: resolveMoviePath(movie.backdrop_path),
+          width: 1200,
+        },
+        {
+          alt: movie.title,
+          height: 300,
+          url: resolveMoviePath(movie.backdrop_path),
+          width: 300,
+        },
+      ],
+      locale: 'en_US',
+      siteName: 'Movie App',
+      title: `${movie.title} - Movie App`,
+      type: 'website',
+    },
+    title: movie.title,
+  }
+}
+
 export default async function Details({ params }: Props) {
   const idAndName = getIdAndNameFromParam(params.idparam)
   if (idAndName == null) return null

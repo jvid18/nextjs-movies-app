@@ -103,5 +103,15 @@ export interface MovieCollection {
   title: string
 }
 
+export interface Keywords {
+  id: number
+  keywords: Keyword[]
+}
+
+export interface Keyword {
+  id: number
+  name: string
+}
+
 export type MovieId = number
 export type MovieTitle = string
