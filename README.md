@@ -4,7 +4,14 @@ You can see the live demo [here](https://nextjs-movies-app-omega.vercel.app).
 
 ## Getting Started
 
-First, install the dependencies:
+First, clone the repository:
+
+```bash
+git clone https://github.com/jvid18/nextjs-movies-app.git
+cd nextjs-movies-app
+```
+
+Install the dependencies:
 
 ```bash
 pnpm install
