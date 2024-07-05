@@ -41,7 +41,7 @@ export interface MovieDetails {
   poster_path: string
   production_companies: ProductionCompany[]
   production_countries: ProductionCountry[]
-  release_date: Date
+  release_date: string
   revenue: number
   runtime: number
   spoken_languages: SpokenLanguage[]
@@ -81,6 +81,19 @@ export interface SpokenLanguage {
   english_name: string
   iso_639_1: string
   name: string
+}
+
+export interface MovieVideo {
+  id: string
+  iso_639_1: string
+  iso_3166_1: string
+  key: string
+  name: string
+  official: boolean
+  published_at: string
+  site: string
+  size: number
+  type: string
 }
 
 export interface MovieCollection {

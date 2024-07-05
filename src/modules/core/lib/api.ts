@@ -34,8 +34,6 @@ function createInstance() {
     const fullURL = new URL(`${baseURL}${url}`)
     fullURL.search = query.toString() ?? ''
 
-    console.log(fullURL.toString())
-
     const response = await fetch(fullURL, fetchOpts)
     if (!response.ok) {
       throw new HTTPError(response.statusText, response.status)
