@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
 
+import { Wrapper } from '@/modules/core/ui/wrapper'
+import Link from 'next/link'
+
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -14,7 +17,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <body>
+        <header className='sticky top-0 z-10 bg-primary py-5 text-primary-foreground shadow'>
+          <Wrapper>
+            <nav className=''>
+              <Link className='text-2xl font-bold' href='/'>
+                Movie App
+              </Link>
+            </nav>
+          </Wrapper>
+        </header>
+        {children}
+      </body>
     </html>
   )
 }

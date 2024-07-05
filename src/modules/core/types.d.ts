@@ -1,3 +1,5 @@
+export type Query = Record<string, boolean | number | string>
+
 export interface PaginatedData<T> {
   page: number
   results: T[]
@@ -80,3 +82,13 @@ export interface SpokenLanguage {
   iso_639_1: string
   name: string
 }
+
+export interface MovieCollection {
+  id: number
+  poster_path: string
+  release_date: string
+  title: string
+}
+
+export type MovieId = number
+export type MovieTitle = string

@@ -1,12 +1,15 @@
 import type {
   MovieDetails,
+  MovieId,
   PaginatedData,
   PopularMovie,
+  Query,
 } from '@/modules/core/types'
 
 import { api } from '@/modules/core/lib/api'
 
 export const movieRepository = {
-  getById: (id: string) => api<MovieDetails>(`/movie/${id}`),
-  getPopular: () => api<PaginatedData<PopularMovie>>('/movie/popular'),
+  getById: (id: MovieId) => api<MovieDetails>(`/movie/${id}`),
+  getPopular: (query?: Query) =>
+    api<PaginatedData<PopularMovie>>('/movie/popular', { query }),
 }

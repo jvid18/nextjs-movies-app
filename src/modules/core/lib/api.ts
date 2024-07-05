@@ -1,7 +1,8 @@
 import { HTTPError } from '@/modules/core/errors/http'
+import { Query } from '@/modules/core/types'
 
 interface RequestInitWithQuery extends RequestInit {
-  query?: Record<string, string>
+  query?: Query
 }
 
 function createInstance() {
