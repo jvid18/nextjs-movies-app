@@ -5,15 +5,19 @@ import {
   type MovieId,
   type MovieVideo,
   type PaginatedData,
-  type PopularMovie,
   type Query,
+  type SimpleMovie,
 } from '@/modules/core/types'
 
 export const movieRepository = {
   getById: (id: MovieId) => api<MovieDetails>(`/movie/${id}`),
+  getByQuery: (query: string, queryParams?: Query) =>
+    api<PaginatedData<SimpleMovie>>(`/search/movie`, {
+      query: { query, ...queryParams },
+    }),
   getKeywords: (id: MovieId) => api<Keywords>(`/movie/${id}/keywords`),
   getPopular: (query?: Query) =>
-    api<PaginatedData<PopularMovie>>('/movie/popular', { query }),
+    api<PaginatedData<SimpleMovie>>('/movie/popular', { query }),
   getVideos: (id: MovieId) =>
     api<PaginatedData<MovieVideo>>(`/movie/${id}/videos`),
 }

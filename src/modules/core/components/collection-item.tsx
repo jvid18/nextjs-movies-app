@@ -19,11 +19,11 @@ export function CollectionItem({
 }: CollectionItemProps) {
   return (
     <Card className='overflow-clip' role='article'>
-      <figure className='relative aspect-[2/3]'>
-        <Link href={href}>
-          <Image alt={alt} fill src={image} />
-        </Link>
-      </figure>
+      <Link href={href}>
+        <figure className='relative aspect-[2/3]'>
+          <Image alt={alt} fill sizes='100vw' src={image} />
+        </figure>
+      </Link>
       <CardHeader>
         <CardTitle>
           <Link href={href}>{title}</Link>

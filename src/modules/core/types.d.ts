@@ -7,7 +7,7 @@ export interface PaginatedData<T> {
   total_results: number
 }
 
-export interface PopularMovie {
+export interface SimpleMovie {
   adult: boolean
   backdrop_path: string
   genre_ids: number[]
