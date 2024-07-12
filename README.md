@@ -29,4 +29,9 @@ You can get the API key from [The Movie Database (TMDb) API](https://developer.t
 TMDB_API_KEY=your_api_key
 ```
 
+Finally, run the app:
+```bash
+pnpm dev
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
