@@ -8,7 +8,12 @@ interface CollectionProps {
 
 export function Collection({ movies }: CollectionProps) {
   return (
-    <div className='grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4'>
+    <div
+      className={`grid gap-4`}
+      style={{
+        gridTemplateColumns: `repeat(auto-fit,minmax(250px,${movies.length > 4 ? '1fr' : '300px'}))`,
+      }}
+    >
       {movies.map((movie) => {
         const idParam = getParamFromIdAndName(movie.id, movie.title)
 

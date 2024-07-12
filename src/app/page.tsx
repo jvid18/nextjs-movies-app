@@ -13,7 +13,7 @@ export default async function Home({ searchParams }: Props) {
 
   return (
     <Wrapper className='mt-5'>
-      <h1 className='mb-5 text-3xl'>Popular movies</h1>
+      <h1 className='mb-5 text-3xl font-bold'>Popular movies</h1>
       <Collection movies={data.results} />
       <Pagination
         aria-label='Pagination'

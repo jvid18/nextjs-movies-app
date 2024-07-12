@@ -72,9 +72,11 @@ export default async function Details({ params }: Props) {
   return (
     <Wrapper className='mt-5 space-y-5'>
       <Hero
+        backgrondPath={movie.backdrop_path}
         genres={movie.genres.map((genre) => genre.name)}
-        image={resolveMoviePath(movie.backdrop_path)}
+        id={id}
         overview={movie.overview}
+        posterPath={movie.poster_path}
         releaseDate={
           movie.release_date !== '' ? new Date(movie.release_date) : undefined
         }
