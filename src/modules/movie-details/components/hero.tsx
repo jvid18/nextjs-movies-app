@@ -1,3 +1,4 @@
+import { AverageRating } from '@/modules/core/components/average-rating'
 import { Button } from '@/modules/core/ui/button'
 import { RelativeTime } from '@/modules/core/ui/relative-time'
 import { TrailerButton } from '@/modules/movie-details/components/trailer-button'
@@ -10,6 +11,7 @@ interface HeroProps {
   releaseDate?: Date
   title: string
   videoId?: string
+  voteAverage: number
 }
 export function Hero({
   genres,
@@ -17,12 +19,13 @@ export function Hero({
   overview,
   releaseDate,
   title,
-  videoId: videoId,
+  videoId,
+  voteAverage,
 }: HeroProps) {
   const bookmarked = false // TODO: Implement bookmarked state with local storage
 
   return (
-    <div className='relative h-[30rem] overflow-clip rounded-md'>
+    <section className='relative h-[30rem] overflow-clip rounded-md'>
       <picture>
         <Image
           alt={`${title} backdrop`}
@@ -36,7 +39,9 @@ export function Hero({
       <header className='absolute bottom-0 p-10 text-white'>
         <div className='flex items-center gap-5'>
           <h1 className='text-4xl font-bold'>{title}</h1>
+
           {videoId && <TrailerButton videoId={videoId} />}
+
           <Button
             className='rounded-full border border-white text-white'
             size='icon'
@@ -68,6 +73,7 @@ export function Hero({
             )}
           </Button>
         </div>
+
         <div className='flex gap-2'>
           <p>
             <strong className='sr-only'>Release date:</strong>
@@ -79,11 +85,14 @@ export function Hero({
             {new Intl.ListFormat().format(genres)}
           </p>
         </div>
+
+        <AverageRating className='mt-3 text-lg' value={voteAverage} />
+
         <section className='mt-5'>
           <h2 className='mt-3 text-xl font-semibold'>Overview</h2>
           <p className='mt-2'>{overview}</p>
         </section>
       </header>
-    </div>
+    </section>
   )
 }

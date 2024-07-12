@@ -2,9 +2,11 @@ import { currencyFormat } from '@/modules/core/lib/format'
 import { getIdAndNameFromParam, resolveMoviePath } from '@/modules/core/lib/url'
 import { movieRepository } from '@/modules/core/services/movie-repository'
 import { Wrapper } from '@/modules/core/ui/wrapper'
+import { Cast } from '@/modules/movie-details/components/cast'
 import { Hero } from '@/modules/movie-details/components/hero'
 import { Stats } from '@/modules/movie-details/components/stats'
 import { Metadata } from 'next'
+import { Suspense } from 'react'
 
 interface Props {
   params: { idparam: string }
@@ -68,7 +70,7 @@ export default async function Details({ params }: Props) {
   const trailer = videos.results.find((video) => video.type === 'Trailer')
 
   return (
-    <Wrapper className='mt-5'>
+    <Wrapper className='mt-5 space-y-5'>
       <Hero
         genres={movie.genres.map((genre) => genre.name)}
         image={resolveMoviePath(movie.backdrop_path)}
@@ -78,16 +80,28 @@ export default async function Details({ params }: Props) {
         }
         title={movie.title}
         videoId={trailer?.key}
+        voteAverage={movie.vote_average}
       />
 
-      <Stats
-        stats={[
-          { name: 'Status', value: movie.status },
-          { name: 'Original language', value: movie.original_language },
-          { name: 'Budget', value: currencyFormat(movie.budget) },
-          { name: 'Revenue', value: currencyFormat(movie.revenue) },
-        ]}
-      />
+      <section>
+        <h2 className='mb-2 text-2xl font-semibold'>Stats</h2>
+        <Stats
+          stats={[
+            { name: 'Status', value: movie.status },
+            { name: 'Original language', value: movie.original_language },
+            { name: 'Budget', value: currencyFormat(movie.budget) },
+            { name: 'Revenue', value: currencyFormat(movie.revenue) },
+          ]}
+        />
+      </section>
+
+      <section>
+        <h2 className='mb-2 text-2xl font-semibold'>Cast</h2>
+
+        <Suspense fallback={'Loading...'}>
+          <Cast id={id} />
+        </Suspense>
+      </section>
     </Wrapper>
   )
 }

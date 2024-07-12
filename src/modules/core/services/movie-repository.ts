@@ -1,6 +1,7 @@
 import { api } from '@/modules/core/lib/api'
 import {
   Keywords,
+  MovieCredit,
   type MovieDetails,
   type MovieId,
   type MovieVideo,
@@ -15,6 +16,7 @@ export const movieRepository = {
     api<PaginatedData<SimpleMovie>>(`/search/movie`, {
       query: { query, ...queryParams },
     }),
+  getCredits: (id: MovieId) => api<MovieCredit>(`/movie/${id}/credits`),
   getKeywords: (id: MovieId) => api<Keywords>(`/movie/${id}/keywords`),
   getPopular: (query?: Query) =>
     api<PaginatedData<SimpleMovie>>('/movie/popular', { query }),
