@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
-import { Wrapper } from '@/modules/core/ui/wrapper'
-import Link from 'next/link'
+import { Header } from '@/modules/core/components/header'
+import { Providers } from '@/modules/core/components/providers'
 
 import './globals.css'
 
@@ -37,28 +37,8 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body>
-        <header className='sticky top-0 z-10 bg-primary py-5 text-primary-foreground shadow'>
-          <Wrapper className='flex items-center justify-between'>
-            <Link className='text-2xl font-bold' href='/'>
-              Movie App
-            </Link>
-
-            <nav>
-              <ul className='flex gap-3'>
-                <li>
-                  <Link href='/'>Home</Link>
-                </li>
-                <li>
-                  <Link href='/search'>Search</Link>
-                </li>
-                <li>
-                  <Link href='/favorites'>Favorites</Link>
-                </li>
-              </ul>
-            </nav>
-          </Wrapper>
-        </header>
-        {children}
+        <Header />
+        <Providers>{children}</Providers>
       </body>
     </html>
   )
